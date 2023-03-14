@@ -2,16 +2,20 @@ import React, { FC } from "react";
 
 type Props = {
   color: string;
-  message: string;
+  children: string;
 };
 
 export const ColorfulMessage = (props:Props) => {
+
+  // オブジェクトの分割代入
+  const { color, children } = props;
+
   console.log(props);
 
   const containtStyle = {
-    color: props.color,
+    color: color,
     fontSize: "18px",
   };
 
-  return <p style={containtStyle}>{props.message}</p>;
+  return <p style={containtStyle}>{children}</p>;
 };
