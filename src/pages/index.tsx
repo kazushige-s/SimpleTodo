@@ -1,5 +1,5 @@
 import { Inter } from "next/font/google";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ColorfulMessage } from "src/components/ColorfulMessage";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -8,7 +8,7 @@ export default function Home() {
   console.log("さいしょ");
 
   const [num, setNum] = useState(0);
-  const [faceShow, setFaceShow] = useState(true);
+  const [faceShow, setFaceShow] = useState(false);
 
   const onClickCountUp = () => {
     setNum((num) => num + 1);
@@ -17,6 +17,20 @@ export default function Home() {
   const onClickSwitchFace = () => {
     setFaceShow(!faceShow);
   };
+
+  // useEffectに空の配列を渡すと、最初の一回だけ実行される
+  //numを渡すと、numが更新されるたびに実行される
+  useEffect(() => {
+    // setFaceShowが呼ばれるたびに、faceShowが更新されるため、||と&&を使っている
+    if (num > 0) {
+      if (num % 3 === 0) {
+        faceShow || setFaceShow(true);
+      } else {
+        faceShow && setFaceShow(false);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [num]);
 
   return (
     <>
