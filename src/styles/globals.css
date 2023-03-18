@@ -9,3 +9,25 @@
     font-family: Proxima Nova, system-ui, sans-serif;
   }
 }
+
+/* 追加ボタン */
+@layer components {
+  .area {
+    @apply m-2 w-96 rounded-lg bg-gray-200 p-2;
+  }
+  .input-area {
+    @apply rounded-lg border border-gray-300 bg-gray-50 p-1 py-2.5 text-sm text-gray-900 shadow focus:border-blue-500;
+  }
+  .add-btn {
+    @apply mx-2 my-2 rounded-lg bg-blue-600 p-1 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none;
+  }
+  .btn {
+    @apply mx-1 my-1 rounded-lg bg-blue-600 px-2.5 py-1 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none;
+  }
+  .h1 {
+    @apply my-2 text-center align-middle;
+  }
+  .list {
+    @apply m-2 font-medium;
+  }
+}
