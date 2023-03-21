@@ -43,7 +43,13 @@ export default function Home() {
     setCompleteTodos(newCompleteTodos);
   };
 
-  
+  const onClickBack = (i: number) => {
+    const newCompleteTodos = [...completeTodos];
+    newCompleteTodos.splice(i, 1);
+    const newIncompleteTodos = [...incompleteTodos, completeTodos[i]];
+    setCompleteTodos(newCompleteTodos);
+    setIncompleteTodos(newIncompleteTodos);
+  };
 
   return (
     <div className="font-zenKurenaido">
@@ -102,12 +108,14 @@ export default function Home() {
       <div className="area">
         <h1 className="h1">Completed</h1>
         <ul>
-          {completeTodos.map((todo) => {
+          {completeTodos.map((todo,i) => {
             return (
               <div key={Math.random()} className="flex items-center">
                 <Point size={16} />
                 <li className="list">{todo}</li>
-                <button className="btn">Back</button>
+                <button onClick={() => onClickBack(i)} className="btn">
+                  Back
+                </button>
               </div>
             );
           })}
