@@ -4,10 +4,10 @@ import { Point } from "tabler-icons-react";
 export default function Home() {
   const [todoText, setTodoText] = useState("");
   const [incompleteTodos, setIncompleteTodos] = useState(["To Do1", "To Do2"]);
-  const [completeTodos, setCompleteTodos] = useState(["To Do2"]);
+  const [completeTodos, setCompleteTodos] = useState(["To Do3"]);
 
   //入力エリアに入力された時の処理
-  const onChangeTodoText = (e: any) => {
+  const onChangeTodoText = (e: React.ChangeEvent<HTMLInputElement>) => {
     //変数todoTextを、関数setTodoTextで更新する
     setTodoText(e.target.value);
   };
@@ -27,10 +27,23 @@ export default function Home() {
   };
 
   const onClickDelete = (i: number) => {
+    //変数newTodosに未完了のToDoを分割代入する
     const newTodos = [...incompleteTodos];
+    //変数newTodosから、i番目の要素を削除する。第2引数には、削除する要素の数を指定する
     newTodos.splice(i, 1);
+    //未完了のToDoを更新する
     setIncompleteTodos(newTodos);
   };
+
+  const onClickComplete = (i: number) => {
+    const newIncompleteTodos = [...incompleteTodos];
+    newIncompleteTodos.splice(i, 1);
+    const newCompleteTodos = [...completeTodos, incompleteTodos[i]];
+    setIncompleteTodos(newIncompleteTodos);
+    setCompleteTodos(newCompleteTodos);
+  };
+
+  
 
   return (
     <div className="font-zenKurenaido">
@@ -64,8 +77,18 @@ export default function Home() {
                 <li className="list">{todo}</li>
 
                 {/* 完了ボタン */}
-                <button className="btn">Done</button>
+                <button
+                  onClick={() => {
+                    onClickComplete(i);
+                  }}
+                  className="btn"
+                >
+                  Done
+                </button>
+
                 {/* 削除ボタン */}
+                {/* onClickDelete関数に、iを渡す */}
+                {/* 関数に引数を渡したい時は関数を挟む  */}
                 <button onClick={() => onClickDelete(i)} className="btn">
                   Delete
                 </button>
