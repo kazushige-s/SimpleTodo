@@ -6,8 +6,8 @@ import { Point } from "tabler-icons-react";
 
 export default function Home() {
   const [todoText, setTodoText] = useState("");
-  const [incompleteTodos, setIncompleteTodos] = useState([""]);
-  const [completeTodos, setCompleteTodos] = useState([""]);
+  const [incompleteTodos, setIncompleteTodos] = useState(["test1"]);
+  const [completeTodos, setCompleteTodos] = useState(["test2"]);
 
   //入力エリアに入力された時の処理
   const onChangeTodoText = (e: React.ChangeEvent<HTMLInputElement>) => {
