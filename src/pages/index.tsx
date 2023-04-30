@@ -48,25 +48,34 @@ export default function Home() {
   };
 
   return (
-    <div className="font-zenKurenaido">
-      {/* 入力エリア */}
-      <div className="m-2">
-        <InputTodo
-          todoText={todoText}
-          onChange={onChangeTodoText}
-          onClick={onClickAdd}
+    <>
+      <div className="font-zenKurenaido">
+        {/* 入力エリア */}
+        <div className="m-2">
+          <InputTodo
+            disabled={incompleteTodos.length >= 5}
+            todoText={todoText}
+            onChange={onChangeTodoText}
+            onClick={onClickAdd}
+          />
+        </div>
+
+        {incompleteTodos.length >= 5 && (
+          <p className="font-bold text-red-500">
+            The maximum limit for ToDo is five.
+          </p>
+        )}
+
+        {/* 未完了のToDo */}
+        <IncompleteTodos
+          incompleteTodos={incompleteTodos}
+          onClickComplete={onClickComplete}
+          onClickDelete={onClickDelete}
         />
+
+        {/* 完了のToDo */}
+        <CompleteTodo completeTodos={completeTodos} onClickBack={onClickBack} />
       </div>
-
-      {/* 未完了のToDo */}
-      <IncompleteTodos
-        incompleteTodos={incompleteTodos}
-        onClickComplete={onClickComplete}
-        onClickDelete={onClickDelete}
-      />
-
-      {/* 完了のToDo */}
-      <CompleteTodo completeTodos={completeTodos} onClickBack={onClickBack} />
-    </div>
+    </>
   );
 }
